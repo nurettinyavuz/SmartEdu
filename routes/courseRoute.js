@@ -4,7 +4,7 @@ const courseController = require('../controllers/courseController');
 const router = express.Router();
 
 //Form dolduracağız onu göndereceğimiz için post kullandık
-router.route('/').post(courseController.createCourse);
+router.route('/').get(courseController.createCourse);//courseController'daki createCourse'a gidecek
 
 //http://localhost:3000/courses 
 //bu adrese yapılacak her türlü post request createrCourse'u çalıştıracak
