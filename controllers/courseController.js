@@ -47,7 +47,7 @@ exports.getAllCourse = async (req, res) => {
 //TEKİL KURS
 exports.getCourse = async (req, res) => {
   try {
-    const course = await Course.findOne({ _id: req.params.id });
+    const course = await Course.findOne({ slug: req.params.slug });//burada Id yerine slug yakalıyoruz linkte ıd yerine title gözüksün diye
 
     res.status(200).render('course', {//Burada yazan isim ejs sayfası
       course,

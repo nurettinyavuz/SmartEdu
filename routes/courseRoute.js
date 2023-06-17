@@ -6,7 +6,9 @@ const router = express.Router();
 //Form dolduracağız onu göndereceğimiz için post kullandık
 router.route('/').post(courseController.createCourse);//courseController'daki createCourse'a gidecek
 router.route('/').get(courseController.getAllCourse);
-router.route('/:id').get(courseController.getCourse);
+//router.route('/:id').get(courseController.getCourse);
+router.route('/:slug').get(courseController.getCourse);
+
 
 
 
