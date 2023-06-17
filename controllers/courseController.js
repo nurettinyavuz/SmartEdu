@@ -9,7 +9,7 @@ try {
       status: 'success',
       course,
     });
-  } catch {
+  } catch(error){
     res.status(400).json({
       //Hatalı request gönderilirse dönecek
       //Oluşturulan yeni kursu template'e göndermiyoruz json dosyasında saklıyacaağız
@@ -18,3 +18,26 @@ try {
     });
   }
 };
+
+exports.getAllCourse = async (req, res) => {
+  try {//try-catch yapmamızın nedeni hatayı yakalamak için
+    const courses = await Course.find(); //Tüm kursları sıraladı
+  /*    res.status(200).json({
+        //Oluşturulan yeni kursu template'e göndermiyoruz json dosyasında saklıyacaağız
+        status: 'success',
+        courses,
+      });
+     */
+      res.status(200).render('courses',{
+        courses,
+        page_name:'courses'
+      })
+    } catch(error){
+      res.status(400).json({
+        //Hatalı request gönderilirse dönecek
+        //Oluşturulan yeni kursu template'e göndermiyoruz json dosyasında saklıyacaağız
+        status: 'fail',
+        error,
+      });
+    }
+  };

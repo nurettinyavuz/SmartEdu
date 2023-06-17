@@ -13,6 +13,8 @@
             <div class="row"> 
                 <div class="col-lg-9 blog-post-single">
 				            <div class="row"> 
+
+				<% for(let i=0 ;i<courses.length ;i++){ %>
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="course-item mb-5">
 						<div class="image-blog">
@@ -20,10 +22,10 @@
 						</div>
 						<div class="course-br">
 							<div class="course-title">
-								<h2><a href="course-single.html" title="">Engineering</a></h2>
+								<h2><a href="course-single.html" title=""><%= courses[i].name %>  </a></h2>
 							</div>
 							<div class="course-desc">
-								<p>Lorem ipsum door sit amet, fugiat deicata avise id cum, no quo maiorum intel ogrets geuiat operts elicata libere avisse id cumlegebat, liber regione eu sit.... </p>
+								<p><%= courses[i].description %>  </p>
 							</div>
 						</div>
 						<div class="course-meta-bot">
@@ -34,66 +36,7 @@
 					</div>
                 </div><!-- end col -->
 
-                <div class="col-lg-6 col-md-6 col-12">
-                    <div class="course-item mb-5">
-						<div class="image-blog">
-							<img src="images/blog_2.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="course-br">
-							<div class="course-title">
-								<h2><a href="course-single.html" title="">Hotel Management</a></h2>
-							</div>
-							<div class="blog-desc">
-								<p>Lorem ipsum door sit amet, fugiat deicata avise id cum, no quo maiorum intel ogrets geuiat operts elicata libere avisse id cumlegebat, liber regione eu sit.... </p>
-							</div>
-						</div>
-						<div class="course-meta-bot">
-							<ul>
-								<li><i class="fa fa-user" aria-hidden="true"></i>Teacher Name</li>
-							</ul>
-						</div>
-					</div>
-                </div><!-- end col -->	
-				                <div class="col-lg-6 col-md-6 col-12">
-                    <div class="course-item mb-5">
-						<div class="image-blog">
-							<img src="images/blog_2.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="course-br">
-							<div class="course-title">
-								<h2><a href="course-single.html" title="">Hotel Management</a></h2>
-							</div>
-							<div class="blog-desc">
-								<p>Lorem ipsum door sit amet, fugiat deicata avise id cum, no quo maiorum intel ogrets geuiat operts elicata libere avisse id cumlegebat, liber regione eu sit.... </p>
-							</div>
-						</div>
-						<div class="course-meta-bot">
-							<ul>
-								<li><i class="fa fa-user" aria-hidden="true"></i>Teacher Name</li>
-							</ul>
-						</div>
-					</div>
-                </div><!-- end col -->	
-				  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="course-item mb-5">
-						<div class="image-blog">
-							<img src="images/blog_2.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="course-br">
-							<div class="course-title">
-								<h2><a href="course-single.html" title="">Hotel Management</a></h2>
-							</div>
-							<div class="blog-desc">
-								<p>Lorem ipsum door sit amet, fugiat deicata avise id cum, no quo maiorum intel ogrets geuiat operts elicata libere avisse id cumlegebat, liber regione eu sit.... </p>
-							</div>
-						</div>
-						<div class="course-meta-bot">
-							<ul>
-								<li><i class="fa fa-user" aria-hidden="true"></i>Teacher Name</li>
-							</ul>
-						</div>
-					</div>
-                </div><!-- end col -->	
+				<% } %>
             </div><!-- end row -->
 					
                 </div><!-- end col -->
@@ -127,7 +70,7 @@
 
 	<%- include('partials/_footer.ejs')-%>
 
-    <div class="copyrights">
+	<div class="copyrights">
         <div class="container">
             <div class="footer-distributed">
                 <div class="footer-center">                   
@@ -143,6 +86,5 @@
     <script src="js/all.js"></script>
     <!-- ALL PLUGINS -->
     <script src="js/custom.js"></script>
-
 </body>
 </html>
