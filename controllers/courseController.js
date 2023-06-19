@@ -1,4 +1,6 @@
 const Course = require('../models/Course');
+const Category = require('../models/Category');
+
 
 exports.createCourse = async (req, res) => {
   try {
@@ -22,16 +24,24 @@ exports.createCourse = async (req, res) => {
 //Listelemek için
 exports.getAllCourse = async (req, res) => {
   try {
+
+    //Bu kısım kullanıcının kurs sayfasında herhangi bir kategoriye tıkladığı zaman o kategorideki verileri listelemek için filtreledik
+
+    const categorySlug = req.query.categories;
+
+    let filter = {};//İleride seacrhBar'ı aktifleştireceğimiz için boş bir filtre açtık
+    if(categorySlug) {
+      const category = await Category.findOne({slug:categorySlug})
+      filter = {category:category._id}
+    }
     //try-catch yapmamızın nedeni hatayı yakalamak için
-    const courses = await Course.find(); //Tüm kursları sıraladı
-    /*    res.status(200).json({
-        //Oluşturulan yeni kursu template'e göndermiyoruz json dosyasında saklıyacaağız
-        status: 'success',
-        courses,
-      });
-     */
+    const courses = await Course.find(filter); //Tüm kursları sıraladı
+
+    const categories = await Category.find();//Tüm kategorileri sıraladı
+
     res.status(200).render('courses', {
       courses,
+      categories,//Kategoriler tüm kursların gözüktüğü sayfada gözüktüğü için buraya yazdık verileri buraya çektik 
       page_name: 'courses',
     });
   } catch (error) {

@@ -21,6 +21,10 @@ const CourseSchema = new Schema({
   slug:{
     type:String,
     unique:true
+  },
+  category:{//Kurs sayfasında kategoriler olduğu için eşleşdirdik verileri çekebilmek için
+    type:mongoose.Schema.Types.ObjectId,//Dersi açarken önceden açılan kategorinin ID'sini yazıyoruz categoriy kısmına
+    ref:'Category'
   }
 });
 CourseSchema.pre('validate',function(next){
