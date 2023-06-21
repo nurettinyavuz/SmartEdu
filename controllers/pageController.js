@@ -17,3 +17,9 @@ exports.getRegisterPage = (req, res) => {
     page_name: 'register',
   });
 };
+
+exports.getLoginPage = (req, res) => { //Burası sadece login sayfasını açmaya yarıyor işlemleri burada yapmayacağız
+  res.status(200).render('login', {
+    page_name: 'login',
+  });
+};
