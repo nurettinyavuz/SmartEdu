@@ -7,6 +7,7 @@ const router = express.Router();
 //ve PageController'dan hangi sayfa açılacaksa o sayfanın açılması için istek gönderir
 router.route('/').get(pageController.getIndexPage);
 router.route('/about').get(pageController.getAboutPage);
+router.route('/register').get(pageController.getRegisterPage);//Register sayfasını açmak için için pageRoute kullandım ama kayıt olmak için userRoute kullanacağım
 
 
 module.exports = router;

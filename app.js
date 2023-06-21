@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const pageRoute = require('./routes/pageRoute');
 const courseRoute = require('./routes/courseRoute');
 const categoryRoute = require('./routes/categoryRoute');
+const userRoute = require('./routes/userRoute');
+
 const bodyParser = require('body-parser');
 
 
@@ -28,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 app.use('/', pageRoute); //pageRoute'a yönlendirdi örneğin about sayfasını açmak içinde buradan yönlendirecek
 app.use('/courses', courseRoute); //courses çağırıldığı zaman courseRoute'a gidecek sonradan courseController'a gidecek çalışacak
 app.use('/categories', categoryRoute); //category çağırıldığı zaman categoryRoute'a gidecek sonradan categoryController'a gidecek çalışacak //http://localhost:3000/categories 
-app.use('/AvazPromo', categoryRoute);
+app.use('/users', userRoute);
 
 const port = 3000;
 

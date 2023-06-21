@@ -24,20 +24,19 @@ exports.createCourse = async (req, res) => {
 //Listelemek için
 exports.getAllCourse = async (req, res) => {
   try {
-
     //Bu kısım kullanıcının kurs sayfasında herhangi bir kategoriye tıkladığı zaman o kategorideki verileri listelemek için filtreledik
-
     const categorySlug = req.query.categories;
 
     let filter = {};//İleride seacrhBar'ı aktifleştireceğimiz için boş bir filtre açtık
-    if(categorySlug) {
+
+    if(categorySlug) {//categorySlug değeri mevcutsa aşağıya geçer (Yani kullanıcı kurs sayfasında bir tane kategoriye tıklarsa onu filtrelemek için kullanıyoruz bu kısmı)
       const category = await Category.findOne({slug:categorySlug})
       filter = {category:category._id}
     }
     //try-catch yapmamızın nedeni hatayı yakalamak için
-    const courses = await Course.find(filter); //Tüm kursları sıraladı
+    const courses = await Course.find(filter); //Tüm kursları sıraladı (Eğer kategori seçilmezse filter'ın içi boş olduğu için tüm kursları gösterecek)
 
-    const categories = await Category.find();//Tüm kategorileri sıraladı
+    const categories = await Category.find();//Tüm kategorileri sıraladı 
 
     res.status(200).render('courses', {
       courses,
