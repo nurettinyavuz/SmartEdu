@@ -23,7 +23,7 @@ const CourseSchema = new Schema({
     unique:true
   },
   category:{//Kurs sayfasında kategoriler olduğu için eşleşdirdik verileri çekebilmek için
-    type:mongoose.Schema.Types.ObjectId,//Dersi açarken önceden açılan kategorinin ID'sini yazıyoruz categoriy kısmına
+    type:mongoose.Schema.Types.ObjectId,//Dersi açarken önceden açılan kategorinin ID'sini yazıyoruz categoriy kısmına (Postman'de)
     ref:'Category'
   }
 });

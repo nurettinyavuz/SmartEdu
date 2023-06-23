@@ -12,17 +12,36 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
+						
+						    <!-- href içinde yazan kısım linkteki uzantı adıdır http://localhost:3000/about gibi -->
 						<li class="nav-item <%= page_name === 'index' && 'active' %>"><a class="nav-link" href="/">Home</a></li>
 						<li class="nav-item <%= page_name === 'about' && 'active' %>"><a class="nav-link" href="/about">About Us</a></li>
 						<li class="nav-item <%= page_name === 'courses' && 'active' %>"><a class="nav-link" href="/courses">Courses</a></li>
+						<li class="nav-item <%= page_name === 'contact' && 'active' %>"><a class="nav-link" href="/contact">Contact</a></li>						
+						<% if(userIN) { %> <!-- dashboard sadece kullanıcı hesabı açık olana gözükecek bunun içinde userIN eğer varsa ekranda gözükecek (userIN app.js sayfasında tanımladık)-->
 						<li class="nav-item <%= page_name === 'dashboard' && 'active' %>"><a class="nav-link" href="/dashboard">Dashboard</a></li>
-						<li class="nav-item <%= page_name === 'contact' && 'active' %>"><a class="nav-link" href="/contact">Contact</a></li>
+						<% } %>
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-                        <li><a class="hover-btn-new log <%= page_name === 'login' && 'orange' %> mr-2"  href="/login" ><span><i class="fa fa-sign-in" aria-hidden="true"></i></span></a></li>
-						    <!-- aşağıdaki kodda register'a geldiğimizde orange class'ını aktif ettik -->
-						<li><a class="hover-btn-new log <%= page_name === 'register' && 'orange' %> " href="/register" ><span><i class="fa fa-user-plus" aria-hidden="true"></i></span></a></li>
-                    </ul>
+
+					
+					<% if(userIN) { %> 	
+						<!-- Kısaca burada yaptığımız şey ortada userIN yani giriş yapmış kullanıcı varsa login ve register yazıları olmasına gerek yok çünkü zaten giriş yapmış ve kayıtlıdır 
+					   üstteki kodla benzer sadece sign-in butonu ile sign-out butonunu değiştirdik register butonunu yazmadık kullanıcı zaten kayıtlı olduğu için -->
+					   <ul class="nav navbar-nav navbar-right">
+							   <li><a class="hover-btn-new log mr-2" href="/users/logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span></a></li>
+					   </ul>
+						   
+					   <% } %>
+
+
+					<% if(!userIN) { %> 
+                     <!-- Kısaca burada yaptığımız şey ortada userIN yani giriş yapmış kullanıcı yoksa login ve register yazıları olacak -->
+						<ul class="nav navbar-nav navbar-right">
+							 <li><a class="hover-btn-new log <%= page_name ==='login' && 'orange' %> mr-2" href="/login"><span><i class="fa fa-sign-in" aria-hidden="true"></i></span></a></li>
+							 <li><a class="hover-btn-new log <%= page_name ==='register' && 'orange' %>" href="/register"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span></a></li>
+						 </ul>						
+					<% } %>					
+
 				</div>
 			</div>
 		</nav>

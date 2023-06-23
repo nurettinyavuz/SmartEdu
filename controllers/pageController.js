@@ -1,4 +1,5 @@
 exports.getIndexPage = (req, res) => {
+  console.log(req.session.userID);
   res.status(200).render('index', {
     page_name: 'index',
   });
@@ -13,7 +14,7 @@ exports.getAboutPage = (req, res) => {
 };
 
 exports.getRegisterPage = (req, res) => {
-  res.status(200).render('register', {
+  res.status(200).render('register', {//register yazan kısım register.ejs sayfasıdır
     page_name: 'register',
   });
 };
