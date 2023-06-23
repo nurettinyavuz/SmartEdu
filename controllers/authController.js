@@ -4,7 +4,6 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 
-
 exports.createUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
@@ -43,4 +42,10 @@ exports.loginUser = async (req, res) => {
       error,
     });
   }
+};
+
+exports.logoutUser = (req, res) => {
+  req.session.destroy(() => {//Oluşturulan sessionları silmek için req.session.destroy metodu kullanılır.
+    res.redirect('/');
+  });
 };

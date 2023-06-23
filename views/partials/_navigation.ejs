@@ -26,12 +26,14 @@
 					
 					<% if(userIN) { %> 	
 						<!-- Kısaca burada yaptığımız şey ortada userIN yani giriş yapmış kullanıcı varsa login ve register yazıları olmasına gerek yok çünkü zaten giriş yapmış ve kayıtlıdır 
-					   üstteki kodla benzer sadece sign-in butonu ile sign-out butonunu değiştirdik register butonunu yazmadık kullanıcı zaten kayıtlı olduğu için -->
+					   üstteki kodla benzer sadece sign-in butonu ile sign-out butonunu değiştirdik register butonunu yazmadık kullanıcı zaten kayıtlı olduğu için 
+					
+					href içinde yazan kısım linkin uzantısı oluyor-->
 					   <ul class="nav navbar-nav navbar-right">
-							   <li><a class="hover-btn-new log mr-2" href="/users/logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span></a></li>
+						<li><a class="hover-btn-new log mr-2" href="/users/logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span></a></li>					   
 					   </ul>
 						   
-					   <% } %>
+					<% } %>
 
 
 					<% if(!userIN) { %> 
