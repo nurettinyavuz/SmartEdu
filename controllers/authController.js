@@ -34,7 +34,7 @@ exports.loginUser = async (req, res) => {
     const same = await bcrypt.compare(password, user.password); // girilen şifrenin kullanıcının şifresiyle eşleşip eşleşmediğini kontrol eder
     if (same) {
       req.session.userID = user._id; //Yukarıda tanımladığımız user'ın id'sini userID'ye atayacağız (Her kullanıcının farklı ıd'si vardı bu da o)(Hangi kullanıcının giriş işlemi yaptığını ayıt edebiliriz)
-      res.status(200).redirect('/');
+      res.status(200).redirect('/users/dashboard');//users/dashboard dememizin nedeni login yaptıktan sonra dashboard sayfasının açılmasını istiyoruz
     }
   } catch (error) {
     res.status(400).json({
@@ -47,5 +47,16 @@ exports.loginUser = async (req, res) => {
 exports.logoutUser = (req, res) => {
   req.session.destroy(() => {//Oluşturulan sessionları silmek için req.session.destroy metodu kullanılır.
     res.redirect('/');
+  });
+};
+
+//Dashboard sayfasını burada açmamızın nedeni her kullanıcı için farklı sayfanın olması
+//Yani siteye ilk girdiği zaman dashboard sayfası kimsede olmuyor
+
+exports.getDashboardPage = async (req, res) => {
+  const user = await User.findOne({_id:req.session.userID})
+  res.status(200).render('dashboard', { //dashboard.ejs'ye yönlendirdik demek
+    page_name: 'dashboard',
+    user
   });
 };

@@ -19,7 +19,7 @@
 						<li class="nav-item <%= page_name === 'courses' && 'active' %>"><a class="nav-link" href="/courses">Courses</a></li>
 						<li class="nav-item <%= page_name === 'contact' && 'active' %>"><a class="nav-link" href="/contact">Contact</a></li>						
 						<% if(userIN) { %> <!-- dashboard sadece kullanıcı hesabı açık olana gözükecek bunun içinde userIN eğer varsa ekranda gözükecek (userIN app.js sayfasında tanımladık)-->
-						<li class="nav-item <%= page_name === 'dashboard' && 'active' %>"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+						<li class="nav-item <%= page_name === 'dashboard' && 'active' %>"><a class="nav-link" href="/users/dashboard">Dashboard</a></li>
 						<% } %>
 					</ul>
 
