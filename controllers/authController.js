@@ -52,7 +52,6 @@ exports.logoutUser = (req, res) => {
 
 //Dashboard sayfasını burada açmamızın nedeni her kullanıcı için farklı sayfanın olması
 //Yani siteye ilk girdiği zaman dashboard sayfası kimsede olmuyor
-
 exports.getDashboardPage = async (req, res) => {
   const user = await User.findOne({_id:req.session.userID})
   res.status(200).render('dashboard', { //dashboard.ejs'ye yönlendirdik demek

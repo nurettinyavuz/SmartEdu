@@ -31,8 +31,8 @@ global.userIN = null;//Başlangıç değeri olarak null dedim yani 0 olarak tan�
 
 //Middlewares
 app.use(express.static('public'));
-app.use(bodyParser.json()) // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(session({
   secret: 'my_keyboard_cat',
   resave: false,
