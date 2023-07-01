@@ -9,10 +9,7 @@ exports.createUser = async (req, res) => {
     const user = await User.create(req.body);
     //try-catch yapmamızın nedeni hatayı yakalamak için
 
-    res.status(201).json({
-      status: 'success',
-      user,
-    });
+    res.status(201).redirect('/login');
   } catch (error) {
     res.status(400).json({
       //Hatalı request gönderilirse dönecek

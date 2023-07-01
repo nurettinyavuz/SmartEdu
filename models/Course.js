@@ -18,7 +18,7 @@ const CourseSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  slug:{
+  slug:{//Slug otomatik olarak geliyor
     type:String,
     unique:true
   },

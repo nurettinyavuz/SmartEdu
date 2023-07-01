@@ -3,14 +3,26 @@
 <%- include('partials/_navigation.ejs')-%>
 	
 <% if (user){ %>
+	<% if (user.role ==='teacher'){ %> 
+
 
 	<div class="all-title-box">
 		<div class="container text-center">
 			<!-- user.name kısmını authController'da yakaladık -->
-			<h1><%= user.name %></h1><span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+			<h1><%= user.name %></h1><span class="m_1">TEACHER</span></h1>
 		</div>
 	</div>
-	
+<% } %>	
+<% if (user.role ==='student'){ %> 
+
+
+	<div class="all-title-box">
+		<div class="container text-center">
+			<!-- user.name kısmını authController'da yakaladık -->
+			<h1><%= user.name %></h1><span class="m_1">STUDENT</span></h1>
+		</div>
+	</div>
+<% } %>	
     <div id="overviews" class="section wb">
         <div class="container">
             <div class="row"> 
