@@ -1,7 +1,9 @@
 //Üye kaydı için kullalndığımız controller
 
-const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const User = require('../models/User');
+const Category = require ('../models/Category');
+
 const session = require('express-session');
 
 exports.createUser = async (req, res) => {
@@ -50,9 +52,12 @@ exports.logoutUser = (req, res) => {
 //Dashboard sayfasını burada açmamızın nedeni her kullanıcı için farklı sayfanın olması
 //Yani siteye ilk girdiği zaman dashboard sayfası kimsede olmuyor
 exports.getDashboardPage = async (req, res) => {
-  const user = await User.findOne({_id:req.session.userID})
+  const user = await User.findOne({_id:req.session.userID});
+  //Burada categories yazmamaızın nedeni Category'leri yakalayıp kullanıcı yeni kurs açarken kategori açarken ekranında gözüksün diye yazdık (dashboard.ejs'de teacher içinde kullandık)
+  const categories=await Category.find();
   res.status(200).render('dashboard', { //dashboard.ejs'ye yönlendirdik demek
     page_name: 'dashboard',
-    user
+    user,
+    categories
   });
 };

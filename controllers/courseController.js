@@ -6,11 +6,7 @@ exports.createCourse = async (req, res) => {
   try {
     const course = await Course.create(req.body); //Kurs açmak için form'dan bilgileri alacağız
     //try-catch yapmamızın nedeni hatayı yakalamak için
-    res.status(201).json({
-      //Oluşturulan yeni kursu template'e göndermiyoruz json dosyasında saklıyacaağız
-      status: 'success',
-      course,
-    });
+    res.status(201).redirect('/courses');
   } catch (error) {
     res.status(400).json({
       //Hatalı request gönderilirse dönecek
@@ -34,7 +30,7 @@ exports.getAllCourse = async (req, res) => {
       filter = {category:category._id}
     }
     //try-catch yapmamızın nedeni hatayı yakalamak için
-    const courses = await Course.find(filter); //Tüm kursları sıraladı (Eğer kategori seçilmezse filter'ın içi boş olduğu için tüm kursları gösterecek)
+    const courses = await Course.find(filter).sort('-CreatedAt'); //Tüm kursları sıraladı (Eğer kategori seçilmezse filter'ın içi boş olduğu için tüm kursları gösterecek) sort ile de sıraladık en son eklenen en başa geldi
 
     const categories = await Category.find();//Tüm kategorileri sıraladı 
 
