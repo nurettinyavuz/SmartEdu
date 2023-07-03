@@ -13,3 +13,4 @@ module.exports = (req, res, next) => {
       return res.redirect('/login');//Promise hata durumunda, .catch() bloğu çalışır. Burada da kullanıcıyı login sayfasına yönlendiririz.
     });
 };
+ 

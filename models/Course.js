@@ -24,7 +24,11 @@ const CourseSchema = new Schema({
   },
   category:{//Kurs sayfasında kategoriler olduğu için eşleşdirdik verileri çekebilmek için
     type:mongoose.Schema.Types.ObjectId,//Dersi açarken önceden açılan kategorinin ID'sini yazıyoruz categoriy kısmına (Postman'de)
-    ref:'Category'
+    ref:'Category'//ref dediğimiz referans
+  },
+  user:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User'
   }
 });
 CourseSchema.pre('validate',function(next){
@@ -33,7 +37,8 @@ CourseSchema.pre('validate',function(next){
     strict:true,//Gereksiz karakterleri yok sayıyor örneğin : işareti vs
   });
   next();
-})
+});
+
 //Slug dememizin nedeni slugify npm'ini kullandık bu da link yerinde ıd'yi yakalıyordum orada ıd gözüküyordu şimdi title'ı otomatik düzenleyip gösteriyor,daha güzel gözüküyor
 
 const Course = mongoose.model('Course',CourseSchema);

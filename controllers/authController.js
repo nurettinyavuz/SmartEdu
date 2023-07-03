@@ -3,6 +3,8 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Category = require ('../models/Category');
+const Course = require('../models/Course');
+
 
 const session = require('express-session');
 
@@ -55,9 +57,11 @@ exports.getDashboardPage = async (req, res) => {
   const user = await User.findOne({_id:req.session.userID});
   //Burada categories yazmamaızın nedeni Category'leri yakalayıp kullanıcı yeni kurs açarken kategori açarken ekranında gözüksün diye yazdık (dashboard.ejs'de teacher içinde kullandık)
   const categories=await Category.find();
+  const courses = await Course.find({user:req.session.userID});
   res.status(200).render('dashboard', { //dashboard.ejs'ye yönlendirdik demek
     page_name: 'dashboard',
     user,
-    categories
+    categories,
+    courses
   });
 };

@@ -4,7 +4,12 @@ const Category = require('../models/Category');
 
 exports.createCourse = async (req, res) => {
   try {
-    const course = await Course.create(req.body); //Kurs açmak için form'dan bilgileri alacağız
+    const course = await Course.create({//Kurs açmak için form'dan bilgileri alacağız
+      name: req.body.name,
+      description: req.body.description,//req.body.name yazsaydık otomatik olarak name'i alacaktı
+      category: req.body.category,
+      user: req.session.userID //userID'yi authMiddlewear'da tanımlamıştık (Hangi kullanıcı o an login durumundaysa o işe yarıyor kısacası)
+    }); 
     //try-catch yapmamızın nedeni hatayı yakalamak için
     res.status(201).redirect('/courses');
   } catch (error) {
@@ -52,8 +57,8 @@ exports.getAllCourse = async (req, res) => {
 //TEKİL KURS
 exports.getCourse = async (req, res) => {
   try {
-    const course = await Course.findOne({ slug: req.params.slug });//burada Id yerine slug yakalıyoruz linkte ıd yerine title gözüksün diye
-
+    //burada Id yerine slug yakalıyoruz linkte ıd yerine title gözüksün diye
+    const course = await Course.findOne({ slug: req.params.slug }).populate('user');//belirtilen bir alanı referans olarak saklayan belgeleri başka bir koleksiyondan (burada "user" koleksiyonu) getirir(Çünkü öğretmen adını çekebilmek için)
     res.status(200).render('course', {//Burada yazan isim ejs sayfası
       course,
       page_name: 'courses',
@@ -61,7 +66,7 @@ exports.getCourse = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       status: 'fail',
-      error,
+      error, 
     });
   }
 };
