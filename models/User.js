@@ -21,7 +21,11 @@ const UserSchema = new Schema({
     type:String,
     enum:["student","teacher","admin"],
     default:"student",
-  }
+  },
+  courses:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:'Course'//Course modelini referans alıyor demek
+  }]
 });
 //bcrypt modelini kullandık kullanmamızda ki amaç ;
 //kullanıcı şifresini girdiği zaman veritabanında gözükmesin diye öyle yaptık çünkü herhangi biri veri tabanına erişebilidği zaman

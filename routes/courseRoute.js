@@ -10,6 +10,8 @@ router.route('/').post(roleMiddleware(["teacher","admin"]),courseController.crea
 router.route('/').get(courseController.getAllCourse);
 //router.route('/:id').get(courseController.getCourse);
 router.route('/:slug').get(courseController.getCourse);
+router.route('/enroll').post(courseController.enrollCourse);//post dedik çünkü veri eklemeli çıkarmalı işlem yapıyoruz
+
 
 
 

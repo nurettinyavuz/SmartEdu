@@ -28,7 +28,7 @@ const CourseSchema = new Schema({
   },
   user:{
     type:mongoose.Schema.Types.ObjectId,
-    ref:'User'
+    ref:'User'//User yazan User modelini referans alıyor demek
   }
 });
 CourseSchema.pre('validate',function(next){

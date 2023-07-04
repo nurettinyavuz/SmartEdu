@@ -54,7 +54,7 @@ exports.logoutUser = (req, res) => {
 //Dashboard sayfasını burada açmamızın nedeni her kullanıcı için farklı sayfanın olması
 //Yani siteye ilk girdiği zaman dashboard sayfası kimsede olmuyor
 exports.getDashboardPage = async (req, res) => {
-  const user = await User.findOne({_id:req.session.userID});
+  const user = await User.findOne({_id:req.session.userID}).populate('courses');
   //Burada categories yazmamaızın nedeni Category'leri yakalayıp kullanıcı yeni kurs açarken kategori açarken ekranında gözüksün diye yazdık (dashboard.ejs'de teacher içinde kullandık)
   const categories=await Category.find();
   const courses = await Course.find({user:req.session.userID});
