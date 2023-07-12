@@ -17,14 +17,15 @@
 							<img src="/images/blog_single.jpg" alt="" class="img-fluid">
 						</div>
 						<div class="post-content">
+							<!-- Array'in içinde bi elemanın olup olmadığını includes ile kontrol ediyoruz --> 
+							<% if (user && !(user.courses.includes(course._id)) ) { %><!-- Enroll butonunu kullanıcı olmayanlar göremeyecek ve o kursa kayıtlı olanlar göremeyecek --> 
 							<div class="post-date">
-
 								<form method="POST" action="/courses/enroll">
 									<input type="hidden" name="course_id" value="<%= course._id %>"> <!-- Hangi kursa tıklandığını bize gönderiyor daha doğrusu alıyoruz courseController'da kullanıyoruz (kursun _id'sini yakalıyoruz value kısmında)-->
 									<button class="btn btn-lg btn-warning text-white"><span>ENROLL</span></button>
 								  </form>
-
 							</div>
+							<% } %>
 							<div class="meta-info-blog">
 								<span><i class="fa fa-calendar"></i> <a href="#"><%= course.CreatedAt.toLocaleDateString() %></a> </span>
 							</div>

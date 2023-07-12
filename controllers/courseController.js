@@ -60,10 +60,15 @@ exports.getAllCourse = async (req, res) => {
 //TEKİL KURS
 exports.getCourse = async (req, res) => {
   try {
+
+    const user = await User.findById(req.session.userID)
+
+  
     //burada Id yerine slug yakalıyoruz linkte ıd yerine title gözüksün diye
     const course = await Course.findOne({ slug: req.params.slug }).populate('user');//belirtilen bir alanı referans olarak saklayan belgeleri başka bir koleksiyondan (burada "user" koleksiyonu) getirir(Çünkü öğretmen adını çekebilmek için)
     res.status(200).render('course', {//Burada yazan isim ejs sayfası
       course,
+      user,
       page_name: 'courses',
     });
   } catch (error) {
@@ -77,9 +82,10 @@ exports.getCourse = async (req, res) => {
 exports.enrollCourse = async (req, res) => {
   try {
 
+
     const user = await User.findById(req.session.userID);
     //id'si body'den gelen course_id 'ye eşit olan id'yi kursu o kullanıya ekle
-    await user.courses.push({_id:req.body.course_id});//course_id yazdığım kısım course.ejs'de Enroll butonuna verdiğim name
+    await user.courses.push({_id:req.body.course_id});//course_id yazdığım kısım course.ejs'de Enroll butonuna verdiğim name (push ile ekleme yapıyoruz)
     await user.save(); 
 
     res.status(200).redirect('/users/dashboard');
@@ -91,3 +97,17 @@ exports.enrollCourse = async (req, res) => {
   }
 };
 
+exports.releaseCourse = async (req, res) => {
+  try {    
+    const user = await User.findById(req.session.userID);
+    await user.courses.pull({_id:req.body.course_id});
+    await user.save();
+
+    res.status(200).redirect('/users/dashboard');
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      error,
+    });
+  }
+};
