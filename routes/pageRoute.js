@@ -13,6 +13,7 @@ router.route('/').get(pageController.getIndexPage);
 router.route('/about').get(pageController.getAboutPage);
 router.route('/register').get(redirectMiddleware,pageController.getRegisterPage);//Register sayfasını açmak için için pageRoute kullandım ama kayıt olmak için userRoute kullanacağım
 router.route('/login').get(redirectMiddleware,pageController.getLoginPage);
+router.route('/contact').get(pageController.getContactPage);
 
 
 module.exports = router;

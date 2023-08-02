@@ -28,24 +28,27 @@ exports.getAllCourse = async (req, res) => {
   try {
     //Bu kısım kullanıcının kurs sayfasında herhangi bir kategoriye tıkladığı zaman o kategorideki verileri listelemek için filtreledik
     const categorySlug = req.query.categories;
-    const query = req.query.search; //(search yazmamızın nedenicourses.ejs sayfasında name'in adına search dedik ) query dediğimiz ise search alanına değer yaılmışsa
+    const query = req.query.search; //(search yazmamızın nedenicourses.ejs sayfasında name'in adına search dedik ) arama sorgusu bilgilerine erişmek için req.query kullandıldı
 
-    let filter = {}; //İleride seacrhBar'ı aktifleştireceğimiz için boş bir filtre açtık
-
+    let filter = {}; 
+    
+    //categorySlug değeri mevcutsa aşağıya geçer (Yani kullanıcı kurs sayfasında bir tane kategoriye tıklarsa onu filtrelemek için kullanıyoruz bu kısmı)
     if (categorySlug) {
-      //categorySlug değeri mevcutsa aşağıya geçer (Yani kullanıcı kurs sayfasında bir tane kategoriye tıklarsa onu filtrelemek için kullanıyoruz bu kısmı)
       const category = await Category.findOne({ slug: categorySlug });
       filter = { category: category._id };
     }
+
+    // filtre ismi (name) arama sorgusuyla eşleşen kursları listelemek için kullanıldı
     if (query) {
       filter = { name: query };
     }
 
     //query veya categoryslug yoksa
     if (!query && !categorySlug) {
-      (filter.name = ''), (filter.category = null);
+      (filter.name = ''), (filter.category = null); 
     }
 
+    //$or operatörü kullanılarak filtre, kurs adı veya kategoriye göre uygulanır. $regex ve $options kullanılarak, kurs adının büyük/küçük harfe duyarlı olmaz
     const courses = await Course.find({
       $or: [
         { name: { $regex: '.*' + filter.name + '.*', $options: 'i' } },
